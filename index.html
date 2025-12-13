@@ -19,46 +19,56 @@
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
-  /* 背景：深い紺色のグラデーション */
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  
+  /* ▼▼▼ 背景画像の設定（あなたの画像に合わせています） ▼▼▼ */
+  background: 
+    linear-gradient(rgba(20, 5, 40, 0.7), rgba(20, 5, 40, 0.8)), /* 紫系の暗いフィルター */
+    url('ai-bg.png'); /* ← アップロードした画像ファイル名 */
+    
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* ▲▲▲ 設定ここまで ▲▲▲ */
+  
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  color: #e2e8f0;
+  color: #f3f4f6; /* 文字色を少し明るく */
 }
 
 /* --- カード本体 --- */
 .container {
   max-width: 600px;
   width: 100%;
-  /* ガラスのような半透明デザイン */
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  /* 紫ベースのガラスデザイン */
+  background: rgba(30, 10, 50, 0.6); 
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   overflow: hidden;
   position: relative;
 }
 
 /* --- ヘッダー --- */
 .header {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(20, 5, 40, 0.5);
   padding: 30px 20px 20px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header h1 {
-  font-size: 22px;
+  font-size: 24px;
   margin-bottom: 15px;
-  background: linear-gradient(90deg, #60a5fa, #c084fc);
+  /* ゴールド〜紫のグラデーション文字 */
+  background: linear-gradient(90deg, #fbbf24, #d8b4fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 /* --- プログレスバー --- */
@@ -75,11 +85,12 @@ body {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  /* ゴールドのバー */
+  background: linear-gradient(90deg, #7c3aed, #fbbf24);
   border-radius: 3px;
   transition: width 0.4s ease;
   width: 0%;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
 }
 
 /* --- コンテンツエリア --- */
@@ -102,7 +113,7 @@ body {
 }
 
 .question-number {
-  color: #94a3b8;
+  color: #d8b4fe; /* 薄い紫 */
   font-weight: bold;
   font-size: 13px;
   margin-bottom: 8px;
@@ -116,6 +127,7 @@ body {
   color: #fff;
   margin-bottom: 30px;
   line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* --- 選択肢 --- */
@@ -126,36 +138,36 @@ body {
 }
 
 .option {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px 20px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 15px;
-  color: #cbd5e1;
+  color: #e5e7eb;
 }
 
 .option:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #60a5fa;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fbbf24; /* ホバー時にゴールド */
   transform: translateX(3px);
 }
 
 .option.selected {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: #3b82f6;
+  background: rgba(124, 58, 237, 0.2);
+  border-color: #a78bfa;
   color: #fff;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
 }
 
 .option-label {
   font-weight: bold;
   font-size: 14px;
-  color: #94a3b8;
-  border: 1px solid rgba(255,255,255,0.2);
+  color: #d8b4fe;
+  border: 1px solid rgba(216, 180, 254, 0.3);
   width: 24px;
   height: 24px;
   display: flex;
@@ -166,9 +178,9 @@ body {
 }
 
 .option.selected .option-label {
-  background: #3b82f6;
+  background: #7c3aed;
   color: white;
-  border-color: #3b82f6;
+  border-color: #7c3aed;
 }
 
 .option-text {
@@ -187,7 +199,7 @@ body {
   flex: 1;
   padding: 16px;
   border: none;
-  border-radius: 50px; /* 角丸ボタン */
+  border-radius: 50px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -196,25 +208,26 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  /* 紫〜ゴールドのリッチなグラデーション */
+  background: linear-gradient(135deg, #7c3aed 0%, #d97706 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
   filter: brightness(1.1);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #94a3b8;
+  color: #cbd5e1;
   border: 1px solid rgba(255,255,255,0.2);
 }
 
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.1);
   color: white;
 }
 
@@ -244,13 +257,13 @@ body {
 .result-icon {
   font-size: 70px;
   margin-bottom: 15px;
-  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  text-shadow: 0 0 25px rgba(251, 191, 36, 0.5);
 }
 
 .result-type {
   font-size: 26px;
   font-weight: bold;
-  background: linear-gradient(90deg, #60a5fa, #c084fc);
+  background: linear-gradient(90deg, #fbbf24, #d8b4fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 25px;
@@ -258,14 +271,14 @@ body {
 
 .result-description {
   font-size: 15px;
-  color: #cbd5e1;
+  color: #e2e8f0;
   line-height: 1.8;
   margin-bottom: 20px;
   text-align: left;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
   padding: 20px;
   border-radius: 12px;
-  border-left: 4px solid #60a5fa;
+  border-left: 4px solid #fbbf24;
 }
 
 /* おすすめ・警告ボックス */
@@ -277,13 +290,13 @@ body {
 }
 
 .result-recommendation {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #bfdbfe;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  color: #ddd6fe;
 }
 
 .result-warning {
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.15);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: #fca5a5;
 }
@@ -304,7 +317,7 @@ body {
 .line-cta {
   margin-top: 35px;
   padding: 30px 20px;
-  background: linear-gradient(180deg, rgba(6, 199, 85, 0.1) 0%, rgba(6, 199, 85, 0.05) 100%);
+  background: linear-gradient(180deg, rgba(6, 199, 85, 0.15) 0%, rgba(6, 199, 85, 0.05) 100%);
   border: 1px solid #06c755;
   border-radius: 16px;
   color: white;
@@ -312,7 +325,6 @@ body {
   overflow: hidden;
 }
 
-/* LINEボタン周りの光るエフェクト */
 .line-cta::before {
   content: '';
   position: absolute;
@@ -703,91 +715,58 @@ function prevQuestion() {
 
 function calculateResult() {
   const scores = {
-    action: 0,      // 行動力
-    speed: 0,       // スピード志向
-    analysis: 0,    // 分析力
-    money: 0,       // 収益志向
-    efficiency: 0,  // 効率志向
-    learning: 0,    // 学習志向
-    caution: 0,     // 慎重度
-    passive: 0      // 受動性
+    action: 0, speed: 0, analysis: 0, money: 0,
+    efficiency: 0, learning: 0, caution: 0, passive: 0
   };
   
-  // Q1: 新しいツールへの姿勢
+  // Q1
   if (answers[1] === 'A') { scores.action += 3; scores.speed += 3; }
   if (answers[1] === 'B') { scores.action += 2; scores.speed += 1; }
   if (answers[1] === 'C') { scores.passive += 2; scores.caution += 2; }
   if (answers[1] === 'D') { scores.passive += 3; scores.caution += 3; }
-  
-  // Q2: 失敗への考え方
+  // Q2
   if (answers[2] === 'A') { scores.action += 3; scores.speed += 2; }
   if (answers[2] === 'B') { scores.analysis += 3; }
   if (answers[2] === 'C') { scores.passive += 2; scores.caution += 1; }
   if (answers[2] === 'D') { scores.passive += 3; scores.caution += 3; }
-  
-  // Q3: 許容できないこと
+  // Q3
   if (answers[3] === 'A') { scores.efficiency += 3; }
   if (answers[3] === 'B') { scores.caution += 2; scores.money += 1; }
   if (answers[3] === 'C') { scores.passive += 2; }
   if (answers[3] === 'D') { scores.passive += 3; }
-  
-  // Q4: 行動量
+  // Q4
   if (answers[4] === 'A') { scores.action += 3; }
   if (answers[4] === 'B') { scores.action += 2; }
   if (answers[4] === 'C') { scores.passive += 2; }
   if (answers[4] === 'D') { scores.passive += 3; }
-  
-  // Q5: AIの目的
+  // Q5
   if (answers[5] === 'A') { scores.money += 3; }
   if (answers[5] === 'B') { scores.efficiency += 3; }
   if (answers[5] === 'C') { scores.learning += 3; }
   if (answers[5] === 'D') { scores.passive += 2; }
-  
-  // Q6: 数字への姿勢
+  // Q6
   if (answers[6] === 'A') { scores.analysis += 3; scores.money += 2; }
   if (answers[6] === 'B') { scores.analysis += 1; }
   if (answers[6] === 'C') { scores.passive += 1; }
   if (answers[6] === 'D') { scores.passive += 2; }
-  
-  // Q7: 行動特性
+  // Q7
   if (answers[7] === 'A') { scores.action += 2; scores.speed += 3; }
   if (answers[7] === 'B') { scores.analysis += 3; scores.caution += 2; }
   if (answers[7] === 'C') { scores.passive += 2; scores.caution += 2; }
   if (answers[7] === 'D') { scores.passive += 3; }
   
-  // タイプ判定ロジック
-  let resultType = 10; // デフォルト
-  
-  // 危険タイプ（9, 10）
-  if (scores.passive >= 12) {
-    resultType = 10; // AI非適合型
-  } else if (scores.passive >= 8 && scores.action <= 3) {
-    resultType = 9; // AI幻想期待型
-  }
-  // 受動タイプ（8）
-  else if (scores.passive >= 6 && scores.action <= 5) {
-    resultType = 8; // AI受動フォロワー型
-  }
-  // 慎重タイプ（7）
-  else if (scores.caution >= 7 && scores.action >= 4) {
-    resultType = 7; // AI慎重検証型
-  }
-  // 学習タイプ（6）
-  else if (scores.learning >= 6) {
-    resultType = 6; // AI学習投資型
-  }
-  // アクティブタイプ（1-5）
-  else if (scores.action >= 8 && scores.speed >= 6) {
-    resultType = 1; // AI即実行・収益化型
-  } else if (scores.action >= 7 && scores.analysis >= 5) {
-    resultType = 2; // AI高速PDCA型
-  } else if (scores.efficiency >= 7) {
-    resultType = 3; // AI実務効率特化型
-  } else if (scores.analysis >= 6 && scores.caution >= 4) {
-    resultType = 4; // AI堅実マネタイズ型
-  } else if (scores.action >= 5 && scores.analysis >= 4) {
-    resultType = 5; // AI仕組み構築型
-  }
+  // 判定
+  let resultType = 10;
+  if (scores.passive >= 12) resultType = 10;
+  else if (scores.passive >= 8 && scores.action <= 3) resultType = 9;
+  else if (scores.passive >= 6 && scores.action <= 5) resultType = 8;
+  else if (scores.caution >= 7 && scores.action >= 4) resultType = 7;
+  else if (scores.learning >= 6) resultType = 6;
+  else if (scores.action >= 8 && scores.speed >= 6) resultType = 1;
+  else if (scores.action >= 7 && scores.analysis >= 5) resultType = 2;
+  else if (scores.efficiency >= 7) resultType = 3;
+  else if (scores.analysis >= 6 && scores.caution >= 4) resultType = 4;
+  else if (scores.action >= 5 && scores.analysis >= 4) resultType = 5;
   
   return resultType;
 }
@@ -804,19 +783,9 @@ function showResult() {
   
   const recContainer = document.getElementById('resultRecommendation');
   if (result.isWarning) {
-    recContainer.innerHTML = `
-      <div class="result-warning">
-        <h3>⚠️ 重要なお知らせ</h3>
-        <p>${result.recommendation}</p>
-      </div>
-    `;
+    recContainer.innerHTML = `<div class="result-warning"><h3>⚠️ 重要なお知らせ</h3><p>${result.recommendation}</p></div>`;
   } else {
-    recContainer.innerHTML = `
-      <div class="result-recommendation">
-        <h3>おすすめのAI活用法</h3>
-        <p>${result.recommendation}</p>
-      </div>
-    `;
+    recContainer.innerHTML = `<div class="result-recommendation"><h3>おすすめのAI活用法</h3><p>${result.recommendation}</p></div>`;
   }
   
   document.getElementById('resultContainer').classList.add('active');
