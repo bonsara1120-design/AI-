@@ -20,14 +20,17 @@
 body {
   font-family: 'Noto Sans JP', sans-serif;
   
-  /* ▼▼▼ 背景画像の設定（あなたの画像に合わせています） ▼▼▼ */
-  background: 
-    linear-gradient(rgba(20, 5, 40, 0.7), rgba(20, 5, 40, 0.8)), /* 紫系の暗いフィルター */
-    url('ai-bg.png'); /* ← アップロードした画像ファイル名 */
-    
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  /* ▼▼▼ 背景設定（修正版） ▼▼▼ */
+  /* 暗いフィルターを削除し、画像を直接表示します */
+  background-image: url('ai-bg.png');
+  
+  /* 画像が見つからない場合の予備色 */
+  background-color: #1a0b2e; 
+  
+  background-size: cover;       /* 画面いっぱいに広げる */
+  background-position: center;  /* 中央配置 */
+  background-attachment: fixed; /* スクロール固定 */
+  background-repeat: no-repeat;
   /* ▲▲▲ 設定ここまで ▲▲▲ */
   
   min-height: 100vh;
@@ -35,16 +38,18 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  color: #f3f4f6; /* 文字色を少し明るく */
+  color: #f3f4f6;
 }
 
 /* --- カード本体 --- */
 .container {
   max-width: 600px;
   width: 100%;
-  /* 紫ベースのガラスデザイン */
-  background: rgba(30, 10, 50, 0.6); 
-  backdrop-filter: blur(15px);
+  
+  /* 背景画像が派手なので、カードの背景を少し濃くして文字を読みやすくしました */
+  background: rgba(20, 10, 35, 0.85); 
+  backdrop-filter: blur(10px);
+  
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
@@ -54,7 +59,7 @@ body {
 
 /* --- ヘッダー --- */
 .header {
-  background: rgba(20, 5, 40, 0.5);
+  background: rgba(255, 255, 255, 0.03); /* 少しだけ明るく */
   padding: 30px 20px 20px;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -63,10 +68,9 @@ body {
 .header h1 {
   font-size: 24px;
   margin-bottom: 15px;
-  /* ゴールド〜紫のグラデーション文字 */
-  background: linear-gradient(90deg, #fbbf24, #d8b4fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* 画像の左上の「AI」の文字色に合わせ白系に */
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   font-weight: 700;
   letter-spacing: 1.5px;
 }
@@ -85,8 +89,8 @@ body {
 
 .progress-bar {
   height: 100%;
-  /* ゴールドのバー */
-  background: linear-gradient(90deg, #7c3aed, #fbbf24);
+  /* 背景画像のオレンジゴールドに合わせた色 */
+  background: linear-gradient(90deg, #d8b4fe, #fbbf24);
   border-radius: 3px;
   transition: width 0.4s ease;
   width: 0%;
@@ -113,7 +117,7 @@ body {
 }
 
 .question-number {
-  color: #d8b4fe; /* 薄い紫 */
+  color: #d8b4fe;
   font-weight: bold;
   font-size: 13px;
   margin-bottom: 8px;
@@ -127,7 +131,6 @@ body {
   color: #fff;
   margin-bottom: 30px;
   line-height: 1.6;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* --- 選択肢 --- */
@@ -152,7 +155,7 @@ body {
 
 .option:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #fbbf24; /* ホバー時にゴールド */
+  border-color: #fbbf24;
   transform: translateX(3px);
 }
 
@@ -208,15 +211,15 @@ body {
 }
 
 .btn-primary {
-  /* 紫〜ゴールドのリッチなグラデーション */
-  background: linear-gradient(135deg, #7c3aed 0%, #d97706 100%);
+  /* 背景のオレンジゴールドに合わせたボタン */
+  background: linear-gradient(135deg, #9333ea 0%, #d97706 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.5);
   filter: brightness(1.1);
 }
 
