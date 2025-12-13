@@ -20,7 +20,7 @@
 body {
   font-family: 'Noto Sans JP', sans-serif;
   
-  /* ▼▼▼ 背景画像の設定 ▼▼▼ */
+  /* ▼▼▼ 背景画像の設定（ファイルがあれば表示されます） ▼▼▼ */
   background-image: url('ai-bg.png');
   
   /* 画像がない時の予備色 */
@@ -36,22 +36,21 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  color: #334155; /* 文字色を濃いグレーに変更（明るい背景用） */
+  color: #334155;
 }
 
-/* --- カード本体（ここを白く明るくしました） --- */
+/* --- カード本体 --- */
 .container {
   max-width: 600px;
   width: 100%;
   
   /* 白色の半透明（ガラス効果） */
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
-  /* 影を柔らかくして浮遊感を出す */
-  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   position: relative;
 }
@@ -67,7 +66,6 @@ body {
 .header h1 {
   font-size: 24px;
   margin-bottom: 15px;
-  /* タイトルをグラデーションにしてテック感を残す */
   background: linear-gradient(90deg, #7c3aed, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -77,7 +75,7 @@ body {
 
 /* --- プログレスバー --- */
 .progress-container {
-  background: #e2e8f0; /* 背景を薄いグレーに */
+  background: #e2e8f0;
   height: 6px;
   border-radius: 3px;
   margin-top: 10px;
@@ -115,7 +113,7 @@ body {
 }
 
 .question-number {
-  color: #7c3aed; /* 紫色 */
+  color: #7c3aed;
   font-weight: bold;
   font-size: 13px;
   margin-bottom: 8px;
@@ -126,7 +124,7 @@ body {
 .question-text {
   font-size: 20px;
   font-weight: 700;
-  color: #1e293b; /* 濃いネイビーで読みやすく */
+  color: #1e293b;
   margin-bottom: 30px;
   line-height: 1.6;
 }
@@ -139,7 +137,7 @@ body {
 }
 
 .option {
-  background: #ffffff; /* 完全な白 */
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 16px 20px;
@@ -154,13 +152,13 @@ body {
 
 .option:hover {
   background: #f8fafc;
-  border-color: #fbbf24; /* ホバー時にゴールド */
+  border-color: #fbbf24;
   transform: translateX(3px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .option.selected {
-  background: rgba(124, 58, 237, 0.1); /* 薄い紫 */
+  background: rgba(124, 58, 237, 0.1);
   border-color: #7c3aed;
   color: #7c3aed;
   font-weight: bold;
@@ -211,7 +209,6 @@ body {
 }
 
 .btn-primary {
-  /* 明るいデザインに合う鮮やかなグラデーション */
   background: linear-gradient(135deg, #7c3aed 0%, #d97706 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
@@ -265,7 +262,6 @@ body {
 .result-type {
   font-size: 26px;
   font-weight: bold;
-  /* タイトルもグラデーション */
   background: linear-gradient(90deg, #7c3aed, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -293,13 +289,13 @@ body {
 }
 
 .result-recommendation {
-  background: #eff6ff; /* 薄い青 */
+  background: #eff6ff;
   border: 1px solid #bfdbfe;
   color: #1e40af;
 }
 
 .result-warning {
-  background: #fef2f2; /* 薄い赤 */
+  background: #fef2f2;
   border: 1px solid #fecaca;
   color: #991b1b;
 }
@@ -315,7 +311,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- LINE CTA --- */
+/* --- LINE CTA（PDF誘導ボタン） --- */
 .line-cta {
   margin-top: 35px;
   padding: 30px 20px;
@@ -578,7 +574,7 @@ body {
       <div class="result-description" id="resultDescription"></div>
       <div id="resultRecommendation"></div>
       
-      <!-- ▼▼▼ ここを修正しました（特典PDF用） ▼▼▼ -->
+      <!-- ▼▼▼ ここがPDFリンク箇所（present.pdf になっています） ▼▼▼ -->
       <div class="line-cta">
         <h3>🎁 診断特典プレゼント</h3>
         <p>AI副業で失敗しないための<br>
@@ -758,7 +754,7 @@ function calculateResult() {
   if (answers[7] === 'C') { scores.passive += 2; scores.caution += 2; }
   if (answers[7] === 'D') { scores.passive += 3; }
   
-  // 判定
+  // 判定ロジック
   let resultType = 10;
   if (scores.passive >= 12) resultType = 10;
   else if (scores.passive >= 8 && scores.action <= 3) resultType = 9;
