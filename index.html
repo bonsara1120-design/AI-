@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <title>AI活用タイプ診断</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- フォントの読み込み -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+/* --- ベース設定 --- */
 * {
   margin: 0;
   padding: 0;
@@ -12,54 +18,73 @@
 }
 
 body {
-  font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Noto Sans JP', sans-serif;
+  /* 背景：深い紺色のグラデーション */
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  color: #e2e8f0;
 }
 
+/* --- カード本体 --- */
 .container {
   max-width: 600px;
   width: 100%;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  /* ガラスのような半透明デザイン */
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  position: relative;
 }
 
+/* --- ヘッダー --- */
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 30px 20px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 30px 20px 20px;
   text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #60a5fa, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
+/* --- プログレスバー --- */
 .progress-container {
-  background: rgba(255,255,255,0.2);
-  height: 8px;
-  border-radius: 4px;
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  height: 6px;
+  border-radius: 3px;
+  margin-top: 10px;
   overflow: hidden;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .progress-bar {
   height: 100%;
-  background: #fff;
-  border-radius: 4px;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+  transition: width 0.4s ease;
   width: 0%;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }
 
+/* --- コンテンツエリア --- */
 .content {
-  padding: 40px 30px;
+  padding: 30px 25px 40px;
 }
 
 .question-container {
@@ -68,35 +93,32 @@ body {
 
 .question-container.active {
   display: block;
-  animation: fadeIn 0.4s ease;
+  animation: slideIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .question-number {
-  color: #667eea;
+  color: #94a3b8;
   font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .question-text {
   font-size: 20px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 700;
+  color: #fff;
   margin-bottom: 30px;
   line-height: 1.6;
 }
 
+/* --- 選択肢 --- */
 .options {
   display: flex;
   flex-direction: column;
@@ -104,33 +126,49 @@ body {
 }
 
 .option {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 16px 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
+  color: #cbd5e1;
 }
 
 .option:hover {
-  background: #e9ecef;
-  border-color: #667eea;
-  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #60a5fa;
+  transform: translateX(3px);
 }
 
 .option.selected {
-  background: #667eea;
-  border-color: #667eea;
-  color: white;
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
 }
 
 .option-label {
   font-weight: bold;
-  font-size: 18px;
-  min-width: 30px;
+  font-size: 14px;
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.option.selected .option-label {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
 }
 
 .option-text {
@@ -138,48 +176,56 @@ body {
   flex: 1;
 }
 
+/* --- ボタン --- */
 .button-container {
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
-  gap: 12px;
+  gap: 15px;
 }
 
 .btn {
   flex: 1;
   padding: 16px;
   border: none;
-  border-radius: 12px;
+  border-radius: 50px; /* 角丸ボタン */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+  filter: brightness(1.1);
 }
 
 .btn-secondary {
-  background: #e9ecef;
-  color: #666;
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .btn-secondary:hover {
-  background: #dee2e6;
+  background: rgba(255,255,255,0.05);
+  color: white;
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
+/* --- 結果画面 --- */
 .result-container {
   display: none;
   text-align: center;
@@ -187,103 +233,122 @@ body {
 
 .result-container.active {
   display: block;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .result-icon {
-  font-size: 60px;
-  margin-bottom: 20px;
+  font-size: 70px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 .result-type {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
-  color: #667eea;
-  margin-bottom: 20px;
+  background: linear-gradient(90deg, #60a5fa, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
 }
 
 .result-description {
-  font-size: 16px;
-  color: #666;
+  font-size: 15px;
+  color: #cbd5e1;
   line-height: 1.8;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   text-align: left;
-  background: #f8f9fa;
+  background: rgba(0,0,0,0.2);
   padding: 20px;
   border-radius: 12px;
+  border-left: 4px solid #60a5fa;
+}
+
+/* おすすめ・警告ボックス */
+.result-recommendation, .result-warning {
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  text-align: left;
 }
 
 .result-recommendation {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.result-recommendation h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.result-recommendation p {
-  font-size: 14px;
-  line-height: 1.6;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #bfdbfe;
 }
 
 .result-warning {
-  background: #ff6b6b;
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 20px;
-  text-align: left;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
 }
 
-.result-warning h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+.result-recommendation h3, .result-warning h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-.result-warning p {
+.result-recommendation p, .result-warning p {
   font-size: 14px;
   line-height: 1.6;
+  opacity: 0.9;
 }
 
+/* --- LINE CTA --- */
 .line-cta {
-  margin-top: 30px;
-  padding: 25px;
-  background: #06c755;
-  border-radius: 12px;
+  margin-top: 35px;
+  padding: 30px 20px;
+  background: linear-gradient(180deg, rgba(6, 199, 85, 0.1) 0%, rgba(6, 199, 85, 0.05) 100%);
+  border: 1px solid #06c755;
+  border-radius: 16px;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LINEボタン周りの光るエフェクト */
+.line-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, #06c755, transparent);
 }
 
 .line-cta h3 {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #4ade80;
 }
 
 .line-cta p {
   font-size: 14px;
-  margin-bottom: 20px;
-  opacity: 0.9;
+  margin-bottom: 25px;
+  color: #cbd5e1;
+  line-height: 1.7;
 }
 
 .line-button {
   display: inline-block;
-  background: white;
-  color: #06c755;
-  padding: 15px 40px;
-  border-radius: 8px;
+  background: #06c755;
+  color: white;
+  padding: 14px 40px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
 }
 
 .line-button:hover {
+  background: #05b34c;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(6, 199, 85, 0.6);
 }
 </style>
 </head>
@@ -299,7 +364,7 @@ body {
   <div class="content">
     <!-- 質問1 -->
     <div class="question-container active" data-question="1">
-      <div class="question-number">質問 1/7</div>
+      <div class="question-number">Question 01</div>
       <div class="question-text">新しいAIツールが話題になったとき、最初に取る行動は？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -320,13 +385,13 @@ body {
         </div>
       </div>
       <div class="button-container">
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn1">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn1">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問2 -->
     <div class="question-container" data-question="2">
-      <div class="question-number">質問 2/7</div>
+      <div class="question-number">Question 02</div>
       <div class="question-text">AIを使って失敗したときの考え方は？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -348,13 +413,13 @@ body {
       </div>
       <div class="button-container">
         <button class="btn btn-secondary" onclick="prevQuestion()">戻る</button>
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn2">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn2">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問3 -->
     <div class="question-container" data-question="3">
-      <div class="question-number">質問 3/7</div>
+      <div class="question-number">Question 03</div>
       <div class="question-text">副業で一番許容できないのは？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -376,13 +441,13 @@ body {
       </div>
       <div class="button-container">
         <button class="btn btn-secondary" onclick="prevQuestion()">戻る</button>
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn3">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn3">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問4 -->
     <div class="question-container" data-question="4">
-      <div class="question-number">質問 4/7</div>
+      <div class="question-number">Question 04</div>
       <div class="question-text">月1万円をAIで稼ぐためにできる行動は？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -404,13 +469,13 @@ body {
       </div>
       <div class="button-container">
         <button class="btn btn-secondary" onclick="prevQuestion()">戻る</button>
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn4">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn4">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問5 -->
     <div class="question-container" data-question="5">
-      <div class="question-number">質問 5/7</div>
+      <div class="question-number">Question 05</div>
       <div class="question-text">AIを使う最大の目的は？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -432,13 +497,13 @@ body {
       </div>
       <div class="button-container">
         <button class="btn btn-secondary" onclick="prevQuestion()">戻る</button>
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn5">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn5">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問6 -->
     <div class="question-container" data-question="6">
-      <div class="question-number">質問 6/7</div>
+      <div class="question-number">Question 06</div>
       <div class="question-text">数字（PV・売上・CTRなど）を見るのは？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -460,13 +525,13 @@ body {
       </div>
       <div class="button-container">
         <button class="btn btn-secondary" onclick="prevQuestion()">戻る</button>
-        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn6">次へ</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" disabled id="nextBtn6">次へ進む</button>
       </div>
     </div>
 
     <!-- 質問7 -->
     <div class="question-container" data-question="7">
-      <div class="question-number">質問 7/7</div>
+      <div class="question-number">Question 07</div>
       <div class="question-text">あなたが一番近いのは？</div>
       <div class="options">
         <div class="option" data-value="A">
@@ -524,70 +589,70 @@ const results = {
   1: {
     icon: '🚀',
     type: 'AI即実行・収益化型',
-    description: 'スピード×検証力あり。AIで最短収益を狙える層。',
+    description: 'スピード×検証力あり。AIで最短収益を狙える層。<br>考える前に手が動くあなたは、AI時代のトップランナー候補です。',
     recommendation: 'AI検証発信／ツール比較／小額即金モデル',
     isWarning: false
   },
   2: {
     icon: '🔄',
     type: 'AI高速PDCA型',
-    description: '失敗を回せる。長期で一番伸びる。',
+    description: '失敗を回せる。長期で一番伸びる。<br>一発逆転ではなく、改善を積み重ねて大きな資産を築けるタイプです。',
     recommendation: 'ブログ×AI／YouTube改善／自動化検証',
     isWarning: false
   },
   3: {
     icon: '⚡',
     type: 'AI実務効率特化型',
-    description: '稼ぐより「時間削減」。副業の裏方エース。',
+    description: '稼ぐより「時間削減」。副業の裏方エース。<br>AIを使って自分の時給を極限まで高めることができる才能があります。',
     recommendation: '資料作成／リサーチ代行／業務効率化',
     isWarning: false
   },
   4: {
     icon: '📊',
     type: 'AI堅実マネタイズ型',
-    description: '派手さなし。再現性重視。',
+    description: '派手さなし。再現性重視。<br>リスクを取らず、確実なデータを元に成果を出せる実務派タイプです。',
     recommendation: '物販分析／SEO／データ処理',
     isWarning: false
   },
   5: {
     icon: '🏗️',
     type: 'AI仕組み構築型',
-    description: '外注×AIがハマる。事業向き。',
+    description: '外注×AIがハマる。事業向き。<br>自分で作業するより、AIと人を動かして大きな仕組みを作るのが得意です。',
     recommendation: 'YouTube運営／自動投稿／業務設計',
     isWarning: false
   },
   6: {
     icon: '📚',
     type: 'AI学習投資型',
-    description: '今は稼がないが、後で伸びる。',
+    description: '今は稼がないが、後で伸びる。<br>知識欲が深く、本質を理解してから動くため、爆発力はないが大失敗もしません。',
     recommendation: '要約／壁打ち／スキル獲得',
     isWarning: false
   },
   7: {
     icon: '🔍',
     type: 'AI慎重検証型',
-    description: '詐欺に遭いにくいが遅い。',
+    description: '詐欺に遭いにくいが遅い。<br>石橋を叩いて渡るタイプ。情報の真偽を見極める目は確かですが、チャンスを逃すことも。',
     recommendation: '無料AI／小テスト運用',
     isWarning: false
   },
   8: {
     icon: '🤖',
     type: 'AI受動フォロワー型',
-    description: '自分では動かない。指示待ち。',
+    description: '自分では動かない。指示待ち。<br>具体的な指示があれば動けますが、AIを自発的に活用するにはハードルがあります。',
     recommendation: 'テンプレ使用／補助的AI',
     isWarning: false
   },
   9: {
     icon: '⚠️',
     type: 'AI幻想期待型',
-    description: '「楽して稼ぐ」を信じやすい。',
+    description: '「楽して稼ぐ」を信じやすい。<br>AIは魔法の杖ではありません。このままだと高額な情報商材のカモになる可能性があります。',
     recommendation: '❌ まず副業以前の理解が必要',
     isWarning: true
   },
   10: {
     icon: '🛑',
     type: 'AI非適合・今はやるな型',
-    description: '今はAI副業に向かない。',
+    description: '今はAI副業に向かない。<br>AI以前に、副業に対するマインドブロックがあるようです。今は情報収集に留めましょう。',
     recommendation: '❌ 情報収集のみ（行動非推奨）',
     isWarning: true
   }
