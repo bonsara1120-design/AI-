@@ -36,7 +36,7 @@ client = tweepy.Client(
 # ========================
 # 設定
 # ========================
-SHEET_URL = "https://docs.google.com/spreadsheets/d/1XVucwTYjGeZOsqMSS1o6vm10XZ0wOBOH-TQIUFgpSHE/export?format=csv"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1CwVvvHY3qbyI-uS6Y7IWn-o3vKHsmvL54VjzvYS0HMA/export?format=csv"
 JST = timezone(timedelta(hours=9))
 POST_WINDOW_SEC = 3600   # 投稿許容範囲（±1時間）
 SLEEP_SEC = 60           # スレッド間隔
